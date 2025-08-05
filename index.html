@@ -1,51 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quiz App by DeVyne Group</title>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <title>Quiz App by DeVyne Group</title>
 </head>
+
 <body>
-  <div class="container">
-    <img src="images/Logo.jpg" alt="DeVyne Logo" />
-
-    <!-- Dark Mode Toggle -->
-    <div class="theme-toggle">
-      <label class="switch">
-        <input type="checkbox" id="modeToggle" />
-        <span class="slider round"></span>
-      </label>
-      <span class="toggle-label">Dark Mode</span>
-    </div>
-
+    <div class="container">
+<img src="images/Logo.jpg" alt="">
+   
     <div class="app">
-      <h1>DeVyne Quiz App</h1>
 
-      <div class="progress-bar-container">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
-
-      <div class="quiz">
-        <h2 id="question">Question goes here...</h2>
-        <div id="answer-buttons" class="answer-buttons">
-          <button class="btn">Answer 1</button>
-          <button class="btn">Answer 2</button>
-          <button class="btn">Answer 3</button>
-          <button class="btn">Answer 4</button>
+        <h1>DeVyne Quiz App</h1>
+        <div class="quiz">
+            <h2 id="question">Question goes here...</h2>
+            <div id="answer-buttons">
+                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</button>
+            </div>
+            <button id="next-btn">Next</button>
         </div>
-        <button id="next-btn">Next</button>
-      </div>
     </div>
-  </div>
-
-  <script src="script.js"></script>
+</div>
+    <script src="script.js"></script>
 </body>
+
 </html>
