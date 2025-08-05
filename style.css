@@ -1,224 +1,89 @@
-/* Base Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-body {
-  background: linear-gradient(135deg, #1f2a3b, #293b5f);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  transition: background 0.3s ease;
+body{
+    background: #1f2a3b;
 }
 
-body.dark {
-  background: linear-gradient(135deg, #0a0f1a, #111b29);
-  color: #fff;
+.container{
+    display: flex;
 }
 
-/* Container */
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 800px;
+.container img{
+width: 10%;
+height: 10%;
+margin:4% 4% 0;
+border-radius: 70px;
 }
 
-.container img {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 20px;
-  border-radius: 70px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+.app{
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    padding: 30px;
 }
 
-/* Theme Toggle */
-.theme-toggle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
+.app h1{
+    font-size: 25px;
+    color: rgb(35, 35, 156);
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+    padding-bottom: 30px;
 }
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 24px;
+.quiz{
+    padding: 20px 0;
 }
 
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 24px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #4c6fa3;
-}
-
-input:checked + .slider:before {
-  transform: translateX(26px);
-}
-
-.toggle-label {
-  font-weight: 500;
-  color: #fff;
-}
-
-/* App Card */
-.app {
-  background: #ffffff;
-  width: 100%;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  position: relative;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-body.dark .app {
-  background: #1e2a3a;
-  color: #fff;
-}
-
-.app h1 {
-  font-size: 28px;
-  font-weight: 600;
-  border-bottom: 2px solid #333;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-/* Progress Bar */
-.progress-bar-container {
-  background-color: #ddd;
-  border-radius: 20px;
-  overflow: hidden;
-  height: 10px;
-  margin-bottom: 20px;
-}
-
-.progress-bar {
-  height: 100%;
-  width: 0%;
-  background-color: #4c6fa3;
-  transition: width 0.3s ease-in-out;
-}
-
-/* Quiz */
-.quiz h2 {
-  font-size: 20px;
-  font-weight: 600;
-  color: #770a0a;
-  margin-bottom: 15px;
-  transition: all 0.3s;
-}
-
-.answer-buttons {
-  display: flex;
-  flex-direction: column;
-}
-
-.btn {
-  background-color: #fff;
-  color: #222;
-  font-weight: 500;
-  width: 100%;
-  border: 1px solid #222;
-  padding: 12px 16px;
-  margin: 8px 0;
-  text-align: left;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
-.btn:hover:not([disabled]) {
-  background: #4c6fa3;
-  color: #fff;
-  transform: scale(1.01);
-}
-
-.btn:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-#next-btn {
-  background: #444141;
-  color: white;
-  width: 160px;
-  font-weight: 600;
-  border: none;
-  padding: 12px;
-  margin: 20px auto 0;
-  border-radius: 6px;
-  cursor: pointer;
-  display: none;
-  transition: background 0.3s ease;
-}
-
-#next-btn:hover {
-  background: #333;
-}
-
-.correct {
-  background: #9aeabc !important;
-  border-color: #3bb273;
-}
-
-.incorrect {
-  background: #ff9393 !important;
-  border-color: #d9534f;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .app {
-    padding: 20px;
-  }
-
-  .btn {
-    font-size: 14px;
-  }
-
-  .app h1 {
-    font-size: 24px;
-  }
-
-  .quiz h2 {
+.quiz h2{
     font-size: 18px;
-  }
+    font-weight: 600;
+    color:#770a0a
 }
+
+.btn{
+    background-color: #fff;
+    color: #222;
+    font-weight: 500;
+    width: 100%;
+    border: 1px solid #222;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover:not([disabled]){
+    background: #4c6fa3;
+    color: #fff;
+}
+.btn:disabled{
+    cursor: no-drop;
+}
+#next-btn{
+    background: #444141;
+    color: white;
+    width: 150px;
+    font-weight: 500;
+    border: 0;
+    padding: 10px;
+    margin: 20px auto 0;
+    border-radius: 4px;
+    cursor: pointer;
+    display: none;
+}
+
+.correct{
+    background: #9aeabc;
+}
+
+.incorrect{
+    background: #ff9393;
+}     if u want to do changes in any of the file to make it to the next level then u can free to do it
