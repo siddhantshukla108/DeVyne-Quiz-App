@@ -1,94 +1,128 @@
-const questions = [
-  {
-    question: "What is the capital of France?",
-    answers: [
-      { text: "Madrid", correct: false },
-      { text: "Berlin", correct: false },
-      { text: "Paris", correct: true },
-      { text: "Rome", correct: false },
-    ],
-  },
-  {
-    question: "Which planet is known as the Red Planet?",
-    answers: [
-      { text: "Venus", correct: false },
-      { text: "Mars", correct: true },
-      { text: "Jupiter", correct: false },
-      { text: "Saturn", correct: false },
-    ],
-  },
-  {
-    question: "Who wrote 'Hamlet'?",
-    answers: [
-      { text: "Charles Dickens", correct: false },
-      { text: "William Shakespeare", correct: true },
-      { text: "Mark Twain", correct: false },
-      { text: "Leo Tolstoy", correct: false },
-    ],
-  }
-];
+/* Updated style.css for DeVyne Quiz App */
 
-const questionElement = document.getElementById("question");
-const answerButtons = document.getElementById("answer-buttons");
-const nextButton = document.getElementById("next-btn");
-const progressBar = document.getElementById("progress-bar");
-
-let currentQuestionIndex = 0;
-let score = 0;
-
-function startQuiz() {
-  currentQuestionIndex = 0;
-  score = 0;
-  nextButton.innerText = "Next";
-  showQuestion();
-  updateProgressBar();
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-function showQuestion() {
-  resetState();
-  const currentQuestion = questions[currentQuestionIndex];
-  questionElement.innerText = currentQuestion.question;
-
-  currentQuestion.answers.forEach(answer => {
-    const button = document.createElement("button");
-    button.innerText = answer.text;
-    button.classList.add("btn");
-    answerButtons.appendChild(button);
-    if (answer.correct) {
-      button.dataset.correct = true;
-    }
-    button.addEventListener("click", selectAnswer);
-  });
-
-  updateProgressBar();
+body {
+  background: linear-gradient(135deg, #1f2a3b, #293b5f);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-function resetState() {
-  nextButton.style.display = "none";
-  answerButtons.innerHTML = "";
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
 }
 
-function selectAnswer(e) {
-  const selectedBtn = e.target;
-  const isCorrect = selectedBtn.dataset.correct === "true";
-
-  if (isCorrect) {
-    selectedBtn.classList.add("correct");
-    score++;
-  } else {
-    selectedBtn.classList.add("incorrect");
-  }
-
-  Array.from(answerButtons.children).forEach(button => {
-    button.disabled = true;
-    if (button.dataset.correct === "true") {
-      button.classList.add("correct");
-    }
-  });
-
-  nextButton.style.display = "block";
+.container img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  border-radius: 70px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
-function showScore() {
-  resetState();
-  questionElement.innerText = `✅ You scored ${
+.app {
+  background: #ffffff;
+  width: 100%;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.app h1 {
+  font-size: 28px;
+  color: #23239c;
+  font-weight: 600;
+  border-bottom: 2px solid #333;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.progress-bar-container {
+  background-color: #ddd;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 10px;
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #4c6fa3;
+  transition: width 0.3s ease-in-out;
+}
+
+.quiz h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #770a0a;
+  margin-bottom: 15px;
+  transition: all 0.3s;
+}
+
+.btn {
+  background-color: #fff;
+  color: #222;
+  font-weight: 500;
+  width: 100%;
+  border: 1px solid #222;
+  padding: 12px 16px;
+  margin: 8px 0;
+  text-align: left;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn:hover:not([disabled]) {
+  background: #4c6fa3;
+  color: #fff;
+  transform: scale(1.01);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+#next-btn {
+  background: #444141;
+  color: white;
+  width: 160px;
+  font-weight: 600;
+  border: none;
+  padding: 12px;
+  margin: 20px auto 0;
+  border-radius: 6px;
+  cursor: pointer;
+  display: none;
+  transition: background 0.3s ease;
+}
+
+#next-btn:hover {
+  background: #333;
+}
+
+.correct {
+  background: #9aeabc !important;
+  border-color: #3bb273;
+}
+
+.incorrect {
+  background: #ff9393 !important;
+  border-color: #d9534f;
+}
