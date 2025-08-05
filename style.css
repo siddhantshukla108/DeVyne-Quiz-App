@@ -1,89 +1,94 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+const questions = [
+  {
+    question: "What is the capital of France?",
+    answers: [
+      { text: "Madrid", correct: false },
+      { text: "Berlin", correct: false },
+      { text: "Paris", correct: true },
+      { text: "Rome", correct: false },
+    ],
+  },
+  {
+    question: "Which planet is known as the Red Planet?",
+    answers: [
+      { text: "Venus", correct: false },
+      { text: "Mars", correct: true },
+      { text: "Jupiter", correct: false },
+      { text: "Saturn", correct: false },
+    ],
+  },
+  {
+    question: "Who wrote 'Hamlet'?",
+    answers: [
+      { text: "Charles Dickens", correct: false },
+      { text: "William Shakespeare", correct: true },
+      { text: "Mark Twain", correct: false },
+      { text: "Leo Tolstoy", correct: false },
+    ],
+  }
+];
+
+const questionElement = document.getElementById("question");
+const answerButtons = document.getElementById("answer-buttons");
+const nextButton = document.getElementById("next-btn");
+const progressBar = document.getElementById("progress-bar");
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startQuiz() {
+  currentQuestionIndex = 0;
+  score = 0;
+  nextButton.innerText = "Next";
+  showQuestion();
+  updateProgressBar();
 }
 
-body{
-    background: #1f2a3b;
+function showQuestion() {
+  resetState();
+  const currentQuestion = questions[currentQuestionIndex];
+  questionElement.innerText = currentQuestion.question;
+
+  currentQuestion.answers.forEach(answer => {
+    const button = document.createElement("button");
+    button.innerText = answer.text;
+    button.classList.add("btn");
+    answerButtons.appendChild(button);
+    if (answer.correct) {
+      button.dataset.correct = true;
+    }
+    button.addEventListener("click", selectAnswer);
+  });
+
+  updateProgressBar();
 }
 
-.container{
-    display: flex;
+function resetState() {
+  nextButton.style.display = "none";
+  answerButtons.innerHTML = "";
 }
 
-.container img{
-width: 10%;
-height: 10%;
-margin:4% 4% 0;
-border-radius: 70px;
+function selectAnswer(e) {
+  const selectedBtn = e.target;
+  const isCorrect = selectedBtn.dataset.correct === "true";
+
+  if (isCorrect) {
+    selectedBtn.classList.add("correct");
+    score++;
+  } else {
+    selectedBtn.classList.add("incorrect");
+  }
+
+  Array.from(answerButtons.children).forEach(button => {
+    button.disabled = true;
+    if (button.dataset.correct === "true") {
+      button.classList.add("correct");
+    }
+  });
+
+  nextButton.style.display = "block";
 }
 
-.app{
-    background: white;
-    width: 90%;
-    max-width: 600px;
-    margin: 100px auto 0;
-    border-radius: 10px;
-    padding: 30px;
-}
-
-.app h1{
-    font-size: 25px;
-    color: rgb(35, 35, 156);
-    font-weight: 600;
-    border-bottom: 1px solid #333;
-    padding-bottom: 30px;
-}
-
-.quiz{
-    padding: 20px 0;
-}
-
-.quiz h2{
-    font-size: 18px;
-    font-weight: 600;
-    color:#770a0a
-}
-
-.btn{
-    background-color: #fff;
-    color: #222;
-    font-weight: 500;
-    width: 100%;
-    border: 1px solid #222;
-    padding: 10px;
-    margin: 10px 0;
-    text-align: left;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.btn:hover:not([disabled]){
-    background: #4c6fa3;
-    color: #fff;
-}
-.btn:disabled{
-    cursor: no-drop;
-}
-#next-btn{
-    background: #444141;
-    color: white;
-    width: 150px;
-    font-weight: 500;
-    border: 0;
-    padding: 10px;
-    margin: 20px auto 0;
-    border-radius: 4px;
-    cursor: pointer;
-    display: none;
-}
-
-.correct{
-    background: #9aeabc;
-}
-
-.incorrect{
-    background: #ff9393;
-}
+function showScore() {
+  resetState();
+  questionElement.innerText = `✅ You scored ${
