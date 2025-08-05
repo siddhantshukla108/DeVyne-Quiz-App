@@ -6,7 +6,7 @@ const questions = [
       { text: "C", correct: false },
       { text: "Python", correct: false },
       { text: "JavaScript", correct: true },
-    ]
+    ],
   },
   {
     question: "What does CSS stand for?",
@@ -15,7 +15,7 @@ const questions = [
       { text: "Cascading Style Sheets", correct: true },
       { text: "Cascading Simple Sheets", correct: false },
       { text: "Cars SUVs Sailboats", correct: false },
-    ]
+    ],
   },
   {
     question: "What does HTML stand for?",
@@ -23,24 +23,15 @@ const questions = [
       { text: "Hypertext Markup Language", correct: true },
       { text: "Hypertext Markdown Language", correct: false },
       { text: "Hyperloop Machine Language", correct: false },
-      { text: "Helicopters Terminals Motorboats Lamborghinis", correct: false },
-    ]
+      { text: "Helicopters Terminals Motorboats Lamborginis", correct: false },
+    ],
   },
-  {
-    question: "What year was JavaScript launched?",
-    answers: [
-      { text: "1996", correct: false },
-      { text: "1995", correct: true },
-      { text: "1994", correct: false },
-      { text: "none of the above", correct: false },
-    ]
-  }
 ];
 
-const questionElement = document.getElementById("question");
-const answerButtons = document.getElementById("answer-buttons");
-const nextButton = document.getElementById("next-btn");
-const progressBar = document.getElementById("progress-bar");
+const questionEl = document.getElementById("question");
+const answerBtns = document.getElementById("answer-buttons");
+const nextBtn = document.getElementById("next-btn");
+const progressBar = document.getElementById("progressBar");
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -48,20 +39,21 @@ let score = 0;
 function startQuiz() {
   currentQuestionIndex = 0;
   score = 0;
-  nextButton.innerHTML = "Next";
+  nextBtn.innerHTML = "Next";
   showQuestion();
 }
 
 function showQuestion() {
   resetState();
+
   const currentQuestion = questions[currentQuestionIndex];
-  questionElement.innerHTML = currentQuestion.question;
+  questionEl.innerHTML = currentQuestion.question;
 
   currentQuestion.answers.forEach((answer) => {
     const button = document.createElement("button");
     button.innerHTML = answer.text;
     button.classList.add("btn");
-    answerButtons.appendChild(button);
+    answerBtns.appendChild(button);
     if (answer.correct) {
       button.dataset.correct = answer.correct;
     }
@@ -72,15 +64,14 @@ function showQuestion() {
 }
 
 function resetState() {
-  nextButton.style.display = "none";
-  while (answerButtons.firstChild) {
-    answerButtons.removeChild(answerButtons.firstChild);
-  }
+  nextBtn.style.display = "none";
+  answerBtns.innerHTML = "";
 }
 
 function selectAnswer(e) {
   const selectedBtn = e.target;
   const isCorrect = selectedBtn.dataset.correct === "true";
+
   if (isCorrect) {
     selectedBtn.classList.add("correct");
     score++;
@@ -88,21 +79,26 @@ function selectAnswer(e) {
     selectedBtn.classList.add("incorrect");
   }
 
-  Array.from(answerButtons.children).forEach((button) => {
+  Array.from(answerBtns.children).forEach((button) => {
     button.disabled = true;
     if (button.dataset.correct === "true") {
       button.classList.add("correct");
     }
   });
 
-  nextButton.style.display = "block";
+  nextBtn.style.display = "block";
+}
+
+function updateProgressBar() {
+  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+  progressBar.style.width = `${progress}%`;
 }
 
 function showScore() {
   resetState();
-  questionElement.innerHTML = `🎉 You scored ${score} out of ${questions.length}!`;
-  nextButton.innerHTML = "Play Again";
-  nextButton.style.display = "block";
+  questionEl.innerHTML = `You scored ${score} out of ${questions.length}! 🎉`;
+  nextBtn.innerHTML = "Restart Quiz";
+  nextBtn.style.display = "block";
   progressBar.style.width = "100%";
 }
 
@@ -115,7 +111,7 @@ function handleNextButton() {
   }
 }
 
-nextButton.addEventListener("click", () => {
+nextBtn.addEventListener("click", () => {
   if (currentQuestionIndex < questions.length) {
     handleNextButton();
   } else {
@@ -123,9 +119,9 @@ nextButton.addEventListener("click", () => {
   }
 });
 
-function updateProgressBar() {
-  const progress = (currentQuestionIndex / questions.length) * 100;
-  progressBar.style.width = `${progress}%`;
-}
-
 startQuiz();
+
+// Dark Mode Toggle
+document.getElementById("modeToggle").addEventListener("change", function () {
+  document.body.classList.toggle("dark");
+});
