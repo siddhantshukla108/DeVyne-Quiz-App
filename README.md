@@ -1,4 +1,4 @@
-# 🌦️ DeVyneCast — Live Weather Forecast App
+# 🧠 DeVyne Quiz App
 
 ## 📸 App Preview
 
@@ -54,7 +54,7 @@ Here’s how your quiz looks in action:
 4. Start answering and test your score!
 
 ```bash
-git clone https://github.com/your-username/devyne-quiz-app.git
+https://github.com/siddhantshukla108/DeVyne-Quiz-App.git
 cd devyne-quiz-app
 start index.html
 
