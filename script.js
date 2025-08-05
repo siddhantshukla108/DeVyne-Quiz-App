@@ -1,30 +1,39 @@
 const questions = [
   {
-    question: "What is the capital of France?",
+    question: "Which language runs in a web browser?",
     answers: [
-      { text: "Madrid", correct: false },
-      { text: "Berlin", correct: false },
-      { text: "Paris", correct: true },
-      { text: "Rome", correct: false },
-    ],
+      { text: "Java", correct: false },
+      { text: "C", correct: false },
+      { text: "Python", correct: false },
+      { text: "JavaScript", correct: true },
+    ]
   },
   {
-    question: "Which planet is known as the Red Planet?",
+    question: "What does CSS stand for?",
     answers: [
-      { text: "Venus", correct: false },
-      { text: "Mars", correct: true },
-      { text: "Jupiter", correct: false },
-      { text: "Saturn", correct: false },
-    ],
+      { text: "Central Style Sheets", correct: false },
+      { text: "Cascading Style Sheets", correct: true },
+      { text: "Cascading Simple Sheets", correct: false },
+      { text: "Cars SUVs Sailboats", correct: false },
+    ]
   },
   {
-    question: "Who wrote 'Hamlet'?",
+    question: "What does HTML stand for?",
     answers: [
-      { text: "Charles Dickens", correct: false },
-      { text: "William Shakespeare", correct: true },
-      { text: "Mark Twain", correct: false },
-      { text: "Leo Tolstoy", correct: false },
-    ],
+      { text: "Hypertext Markup Language", correct: true },
+      { text: "Hypertext Markdown Language", correct: false },
+      { text: "Hyperloop Machine Language", correct: false },
+      { text: "Helicopters Terminals Motorboats Lamborghinis", correct: false },
+    ]
+  },
+  {
+    question: "What year was JavaScript launched?",
+    answers: [
+      { text: "1996", correct: false },
+      { text: "1995", correct: true },
+      { text: "1994", correct: false },
+      { text: "none of the above", correct: false },
+    ]
   }
 ];
 
@@ -39,23 +48,22 @@ let score = 0;
 function startQuiz() {
   currentQuestionIndex = 0;
   score = 0;
-  nextButton.innerText = "Next";
+  nextButton.innerHTML = "Next";
   showQuestion();
-  updateProgressBar();
 }
 
 function showQuestion() {
   resetState();
   const currentQuestion = questions[currentQuestionIndex];
-  questionElement.innerText = currentQuestion.question;
+  questionElement.innerHTML = currentQuestion.question;
 
-  currentQuestion.answers.forEach(answer => {
+  currentQuestion.answers.forEach((answer) => {
     const button = document.createElement("button");
-    button.innerText = answer.text;
+    button.innerHTML = answer.text;
     button.classList.add("btn");
     answerButtons.appendChild(button);
     if (answer.correct) {
-      button.dataset.correct = true;
+      button.dataset.correct = answer.correct;
     }
     button.addEventListener("click", selectAnswer);
   });
@@ -65,13 +73,14 @@ function showQuestion() {
 
 function resetState() {
   nextButton.style.display = "none";
-  answerButtons.innerHTML = "";
+  while (answerButtons.firstChild) {
+    answerButtons.removeChild(answerButtons.firstChild);
+  }
 }
 
 function selectAnswer(e) {
   const selectedBtn = e.target;
   const isCorrect = selectedBtn.dataset.correct === "true";
-
   if (isCorrect) {
     selectedBtn.classList.add("correct");
     score++;
@@ -79,7 +88,7 @@ function selectAnswer(e) {
     selectedBtn.classList.add("incorrect");
   }
 
-  Array.from(answerButtons.children).forEach(button => {
+  Array.from(answerButtons.children).forEach((button) => {
     button.disabled = true;
     if (button.dataset.correct === "true") {
       button.classList.add("correct");
@@ -91,10 +100,10 @@ function selectAnswer(e) {
 
 function showScore() {
   resetState();
-  questionElement.innerText = `✅ You scored ${score} out of ${questions.length}! 🎉`;
-  nextButton.innerText = "Play Again";
+  questionElement.innerHTML = `🎉 You scored ${score} out of ${questions.length}!`;
+  nextButton.innerHTML = "Play Again";
   nextButton.style.display = "block";
-  progressBar.style.width = `100%`;
+  progressBar.style.width = "100%";
 }
 
 function handleNextButton() {
@@ -106,11 +115,6 @@ function handleNextButton() {
   }
 }
 
-function updateProgressBar() {
-  const progress = (currentQuestionIndex / questions.length) * 100;
-  progressBar.style.width = `${progress}%`;
-}
-
 nextButton.addEventListener("click", () => {
   if (currentQuestionIndex < questions.length) {
     handleNextButton();
@@ -118,5 +122,10 @@ nextButton.addEventListener("click", () => {
     startQuiz();
   }
 });
+
+function updateProgressBar() {
+  const progress = (currentQuestionIndex / questions.length) * 100;
+  progressBar.style.width = `${progress}%`;
+}
 
 startQuiz();
